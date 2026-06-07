@@ -29,6 +29,22 @@ document.querySelectorAll('.addbtn').forEach(btn => {
   });
 });
 
+// ===== Merkliste (Herz) =====
+document.querySelectorAll('.wish').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('is-active');
+    btn.textContent = btn.classList.contains('is-active') ? '♥' : '♡';
+  });
+});
+
+// ===== Grid / Liste Umschalter =====
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
 // ===== Newsletter (Demo) =====
 document.querySelector('.newsletter__form')?.addEventListener('submit', (e) => {
   e.preventDefault();

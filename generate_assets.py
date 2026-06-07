@@ -57,6 +57,24 @@ write("scoop-schoko.svg", scoop("#5b3a24", "#7a4e31", "#43291a", "#3a2414"))
 write("scoop-erdbeere.svg", scoop("#e87a8a", "#f4a0ab", "#d65f70", "#b83b4d"))
 write("scoop-haselnuss.svg", scoop("#c79a63", "#dcb681", "#a87e4b", "#6b4327"))
 write("scoop-stracciatella.svg", scoop("#efe6d2", "#fbf6ec", "#ddcfb4", "#3a2414", chips=True))
+# weitere Sorten fuer die Produktuebersicht
+write("scoop-vanille.svg", scoop("#f0e2b8", "#f9f0d8", "#e0cd97", "#d9a85a"))
+write("scoop-mango.svg", scoop("#f3b24e", "#f8ca7c", "#de9533", "#c8761f"))
+write("scoop-zitrone.svg", scoop("#ecdd6f", "#f6ed9c", "#d8c44a", "#bda93a"))
+write("scoop-kokos.svg", scoop("#f1ebde", "#fbf8f1", "#ddd2bd", "#c1ad8f", chips=True))
+write("scoop-karamell.svg", scoop("#c98a4a", "#dda869", "#a86c33", "#5a3a20"))
+write("scoop-joghurt.svg", scoop("#f5efe3", "#fcf9f3", "#e6dcc9", "#e06f6f"))
+write("scoop-tiramisu.svg", scoop("#c7a173", "#d8bb93", "#a87e4b", "#4a2e1c", chips=True))
+write("scoop-minze.svg", scoop("#b6dcc0", "#cfeed7", "#8fc7a0", "#3a2414", chips=True))
+
+
+# ---------------------------------------------------------------- Italien-Flagge (Kategorie)
+write("flag-italia.svg", """
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <rect width="40" height="120" x="0" fill="#0e8a44"/>
+  <rect width="40" height="120" x="40" fill="#ffffff"/>
+  <rect width="40" height="120" x="80" fill="#cf2734"/>
+</svg>""")
 
 
 # ---------------------------------------------------------------- Hero: grosse Eisschale
