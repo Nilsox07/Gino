@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 760" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <radialGradient id="hbg" cx="62%" cy="40%" r="80%">
+      <stop offset="0%" stop-color="#fbf3e3"/><stop offset="60%" stop-color="#f3e6cd"/><stop offset="100%" stop-color="#e9d6b4"/>
+    </radialGradient>
+    <linearGradient id="pist" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c2d77e"/><stop offset="1" stop-color="#8aa544"/></linearGradient>
+    <linearGradient id="erd" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4a0ab"/><stop offset="1" stop-color="#d65f70"/></linearGradient>
+    <linearGradient id="cream" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbf6ec"/><stop offset="1" stop-color="#e3d4b6"/></linearGradient>
+    <linearGradient id="cho" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7a4e31"/><stop offset="1" stop-color="#4a2e1c"/></linearGradient>
+  </defs>
+  <rect width="900" height="760" fill="url(#hbg)"/>
+  <!-- verstreute Deko -->
+  <circle cx="120" cy="120" r="10" fill="#d65f70" opacity=".5"/>
+  <circle cx="800" cy="90" r="8" fill="#a9c25e" opacity=".6"/>
+  <circle cx="180" cy="640" r="9" fill="#8aa544" opacity=".5"/>
+  <circle cx="760" cy="660" r="11" fill="#d65f70" opacity=".45"/>
+  <!-- Schale -->
+  <ellipse cx="470" cy="545" rx="300" ry="72" fill="#ead9b9"/>
+  <path d="M180 520 Q470 660 760 520 L735 575 Q470 700 205 575 Z" fill="#d9c39c"/>
+  <ellipse cx="470" cy="515" rx="295" ry="66" fill="#f3e8d2"/>
+  <!-- Kugeln -->
+  <circle cx="350" cy="430" r="95" fill="url(#pist)"/>
+  <circle cx="600" cy="440" r="88" fill="url(#erd)"/>
+  <circle cx="470" cy="370" r="105" fill="url(#cream)"/>
+  <circle cx="245" cy="470" r="70" fill="url(#cho)"/>
+  <circle cx="690" cy="490" r="60" fill="url(#pist)"/>
+  <!-- Glanz -->
+  <ellipse cx="440" cy="320" rx="42" ry="26" fill="#ffffff" opacity=".4"/>
+  <ellipse cx="330" cy="395" rx="30" ry="18" fill="#ffffff" opacity=".22"/>
+  <!-- Pistazien/Topping -->
+  <g fill="#6d4a2f">
+    <ellipse cx="320" cy="400" rx="9" ry="6"/><ellipse cx="380" cy="420" rx="9" ry="6"/>
+    <ellipse cx="350" cy="460" rx="9" ry="6"/><ellipse cx="690" cy="470" rx="8" ry="5"/>
+  </g>
+  <g fill="#b83b4d"><circle cx="590" cy="410" r="7"/><circle cx="620" cy="450" r="7"/><circle cx="560" cy="450" r="6"/></g>
+  <!-- Erdbeere oben -->
+  <path d="M470 300 q22 -8 30 12 q6 24 -30 40 q-36 -16 -30 -40 q8 -20 30 -12z" fill="#d83a4e"/>
+  <path d="M470 296 l-10 -14 8 2 2 -10 4 10 8 -4 -6 12z" fill="#5a8a3a"/>
+  <circle cx="462" cy="320" r="2" fill="#ffd27a"/><circle cx="478" cy="330" r="2" fill="#ffd27a"/><circle cx="470" cy="345" r="2" fill="#ffd27a"/>
+  <!-- Minzblatt -->
+  <path d="M540 320 q30 -18 44 4 q-26 18 -44 -4z" fill="#5a8a3a"/>
+</svg>
