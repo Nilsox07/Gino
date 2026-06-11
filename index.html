@@ -20,6 +20,15 @@
       <div class="preloader__bar"><span id="preBar"></span></div>
     </div>
   </div>
+  <script>
+    /* Failsafe: Preloader IMMER entfernen – auch wenn Animations-Libs
+       (gsap/three/lenis) im Browser nicht laden. Verhindert leere Seite. */
+    (function () {
+      function lift() { var p = document.getElementById('preloader'); if (p) p.classList.add('done'); }
+      window.addEventListener('load', function () { setTimeout(lift, 1600); });
+      setTimeout(lift, 3000); // absolute Notbremse
+    })();
+  </script>
 
   <!-- Custom Cursor -->
   <div class="cursor" id="cursor"></div>
