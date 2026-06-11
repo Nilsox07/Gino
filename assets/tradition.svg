@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe2ef"/><stop offset="100%" stop-color="#eaf6f2"/></linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4f9fb8"/><stop offset="100%" stop-color="#2f7d97"/></linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#sky)"/>
+  <circle cx="660" cy="110" r="46" fill="#fdf3d4" opacity=".8"/>
+  <!-- Meer -->
+  <rect y="360" width="800" height="240" fill="url(#sea)"/>
+  <g stroke="#ffffff" stroke-width="2" opacity=".25">
+    <path d="M40 430 q30 -10 60 0 t60 0" fill="none"/><path d="M520 470 q30 -10 60 0 t60 0" fill="none"/>
+    <path d="M120 520 q30 -10 60 0 t60 0" fill="none"/>
+  </g>
+  <!-- linke Landzunge mit Haeusern -->
+  <path d="M0 360 L0 250 Q120 230 210 300 L260 360 Z" fill="#8aa15a"/>
+  <path d="M0 360 L0 250 Q120 230 210 300 L260 360 Z" fill="#6f8a47" opacity=".4"/>
+  <g>
+    <rect x="40" y="288" width="46" height="58" fill="#e8b15a"/><rect x="40" y="288" width="46" height="14" fill="#c9863a"/>
+    <rect x="92" y="300" width="40" height="46" fill="#e07b5a"/><rect x="92" y="300" width="40" height="12" fill="#bd5b3e"/>
+    <rect x="138" y="312" width="38" height="34" fill="#efd6a0"/><rect x="138" y="312" width="38" height="10" fill="#cdb074"/>
+    <rect x="10" y="312" width="30" height="34" fill="#dd6f6f"/>
+    <g fill="#7a4a2c"><rect x="52" y="304" width="8" height="10"/><rect x="68" y="304" width="8" height="10"/><rect x="104" y="316" width="7" height="9"/></g>
+  </g>
+  <!-- rechte Kueste -->
+  <path d="M800 360 L800 280 Q700 250 600 320 L560 360 Z" fill="#7d9650"/>
+  <g>
+    <rect x="690" y="300" width="40" height="50" fill="#e8b15a"/><rect x="640" y="312" width="36" height="38" fill="#dd6f6f"/>
+    <rect x="740" y="308" width="34" height="42" fill="#efd6a0"/>
+  </g>
+  <!-- Boot -->
+  <path d="M360 470 q40 26 90 0 z" fill="#f2efe6"/><rect x="402" y="440" width="3" height="32" fill="#9a8050"/>
+  <path d="M405 442 l26 22 -26 6z" fill="#d65f70"/>
+</svg>

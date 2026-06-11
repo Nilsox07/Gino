@@ -3,380 +3,293 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gino Gelati – Italienischer Genuss für besondere Momente</title>
-  <meta name="description" content="Über 500 Eissorten mit Liebe gemacht und direkt zu dir nach Hause geliefert. Italienische Eistradition seit 1969." />
+  <title>Gino Gelati – Gelato Artigianale. Neu erlebt.</title>
+  <meta name="description" content="Über 500 Eissorten, italienische Handwerkskunst seit 1969 – erlebe Gelato wie nie zuvor." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,500;0,600;0,700;0,800;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,500;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="modern.css" />
 </head>
 <body>
 
-  <!-- ===================== TOP BAR ===================== -->
-  <div class="topbar">
-    <div class="container topbar__inner">
-      <ul class="topbar__left">
-        <li>🚚 Kostenloser Versand ab 49€</li>
-        <li>⚡ Express-Lieferung</li>
-        <li>🌿 Nachhaltige Verpackung</li>
-      </ul>
-      <ul class="topbar__right">
-        <li><a href="#">Kundenservice</a></li>
-        <li><a href="#">Mein Konto</a></li>
-      </ul>
+  <!-- ============ PRELOADER ============ -->
+  <div class="preloader" id="preloader">
+    <div class="preloader__inner">
+      <span class="preloader__logo">Gino Gelati</span>
+      <span class="preloader__count" id="preCount">0%</span>
+      <div class="preloader__bar"><span id="preBar"></span></div>
     </div>
   </div>
+  <script>
+    /* Failsafe: Preloader IMMER entfernen – auch wenn Animations-Libs
+       (gsap/three/lenis) im Browser nicht laden. Verhindert leere Seite. */
+    (function () {
+      function lift() { var p = document.getElementById('preloader'); if (p) p.classList.add('done'); }
+      window.addEventListener('load', function () { setTimeout(lift, 1600); });
+      setTimeout(lift, 3000); // absolute Notbremse
+    })();
+  </script>
 
-  <!-- ===================== HEADER ===================== -->
-  <header class="header">
-    <div class="container header__inner">
-      <button class="header__burger" aria-label="Menü öffnen" id="burger">
-        <span></span><span></span><span></span>
-      </button>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-dot" id="cursorDot"></div>
 
-      <nav class="mainnav" id="mainnav">
-        <a href="#">Eis Sorten</a>
-        <a href="#">Aktionen</a>
-        <a href="#">Rezepte</a>
-        <a href="#">Club Gino</a>
-        <a href="#">Über uns</a>
-      </nav>
+  <!-- Scroll Progress -->
+  <div class="progress" id="progress"></div>
 
-      <a href="#" class="logo">
-        <span class="logo__name">Gino Gelati</span>
-        <span class="logo__sub">— DAL 1969 —</span>
+  <!-- Grain Overlay -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ============ NAV ============ -->
+  <header class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" data-magnetic>
+        <span class="nav__logo-name">Gino Gelati</span>
+        <span class="nav__logo-sub">DAL 1969</span>
       </a>
-
-      <div class="header__right">
-        <form class="search" role="search">
-          <span class="search__icon">🔍</span>
-          <input type="search" placeholder="Suche nach Sorten, Zutaten…" aria-label="Suche" />
-        </form>
-        <button class="cart" aria-label="Warenkorb">
-          🛒<span class="cart__badge" id="cartBadge">0</span>
-        </button>
+      <nav class="nav__links">
+        <a href="eis-sorten.html" data-hover>Eis Sorten</a>
+        <a href="#bestseller" data-hover>Bestseller</a>
+        <a href="#story" data-hover>Unsere Story</a>
+        <a href="#club" data-hover>Club Gino</a>
+      </nav>
+      <div class="nav__actions">
+        <a href="eis-sorten.html" class="btn-pill" data-magnetic>Jetzt bestellen
+          <span class="btn-pill__arrow">→</span>
+        </a>
+        <button class="nav__cart" aria-label="Warenkorb" data-hover>🛒<em id="cartBadge">0</em></button>
       </div>
     </div>
   </header>
 
-  <!-- ===================== HERO ===================== -->
-  <section class="hero">
-    <div class="hero__media" role="img" aria-label="Eisbecher mit Pistazien und Erdbeeren"></div>
-    <div class="container hero__inner">
-      <div class="hero__content">
-        <h1 class="hero__title">Italienischer<br />Genuss für<br />besondere Momente.</h1>
-        <p class="hero__text">Über 500 Eissorten mit Liebe gemacht<br />und direkt zu dir nach Hause geliefert.</p>
-        <div class="hero__actions">
-          <a href="#" class="btn btn--red">Jetzt entdecken</a>
-          <a href="#" class="btn btn--ghost">Sortenfinder starten</a>
-        </div>
-        <div class="hero__rating">
-          <span class="stars">★★★★★</span>
-          <span>4,9/5 aus über 25.000 Bewertungen</span>
-        </div>
-      </div>
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <canvas id="gl" aria-hidden="true"></canvas>
 
-      <aside class="aicard">
-        <span class="aicard__tag">KI Eisberater</span>
-        <h3 class="aicard__title">Welches Eis passt heute zu dir?</h3>
-        <div class="aicard__emoji">🍓🍦🍫</div>
-        <a href="#" class="btn btn--green btn--block">Berater starten</a>
-      </aside>
+    <div class="hero__bg-word" aria-hidden="true">GELATO</div>
+
+    <div class="hero__content">
+      <p class="hero__eyebrow reveal-line"><span>Gelato Artigianale · seit 1969</span></p>
+      <h1 class="hero__title">
+        <span class="hero__line"><span class="hero__word">Italienischer</span></span>
+        <span class="hero__line"><span class="hero__word hero__word--italic">Genuss.</span></span>
+        <span class="hero__line"><span class="hero__word">Neu <em class="hero__accent">erlebt</em>.</span></span>
+      </h1>
+      <p class="hero__sub reveal-fade">Über <strong>500 Sorten</strong> Gelato aus echter italienischer
+        Handwerkskunst — tiefkühlfrisch zu dir nach Hause.</p>
+      <div class="hero__cta reveal-fade">
+        <a href="eis-sorten.html" class="btn-big" data-magnetic>
+          <span>Sorten entdecken</span><span class="btn-big__circle">→</span>
+        </a>
+        <a href="#bestseller" class="btn-line" data-hover>Bestseller ansehen</a>
+      </div>
+    </div>
+
+    <!-- rotierendes Badge -->
+    <div class="hero__badge" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <defs><path id="circ" d="M60,60 m -44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
+        <text><textPath href="#circ">GELATO ARTIGIANALE · DAL 1969 · GINO GELATI ·</textPath></text>
+      </svg>
+      <span class="hero__badge-center">🍦</span>
+    </div>
+
+    <div class="hero__scrollhint" aria-hidden="true">
+      <span></span>
+      <small>Scrollen</small>
     </div>
   </section>
 
-  <!-- ===================== CATEGORIES ===================== -->
-  <section class="cats">
-    <div class="container cats__inner">
-      <a class="cat" href="#"><span class="cat__icon">🍫</span><span class="cat__label">Schokolade</span></a>
-      <a class="cat" href="#"><span class="cat__icon">🍓</span><span class="cat__label">Frucht</span></a>
-      <a class="cat" href="#"><span class="cat__icon">🥜</span><span class="cat__label">Nuss</span></a>
-      <a class="cat" href="#"><span class="cat__icon">🍦</span><span class="cat__label">Klassiker</span></a>
-      <a class="cat" href="#"><span class="cat__icon">🇮🇹</span><span class="cat__label">Italien</span></a>
-      <a class="cat" href="#"><span class="cat__icon">💪</span><span class="cat__label">Protein</span></a>
-      <a class="cat" href="#"><span class="cat__icon">👨‍👩‍👧</span><span class="cat__label">Familie</span></a>
-      <a class="cat" href="#"><span class="cat__icon">🌱</span><span class="cat__label">Vegan</span></a>
-      <a class="cat" href="#"><span class="cat__icon">☀️</span><span class="cat__label">Saison</span></a>
+  <!-- ============ MARQUEE ============ -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Pistazie&nbsp;✦&nbsp;Stracciatella&nbsp;✦&nbsp;Schokolade&nbsp;✦&nbsp;Erdbeere&nbsp;✦&nbsp;Tiramisu&nbsp;✦&nbsp;Mango&nbsp;✦&nbsp;Haselnuss&nbsp;✦&nbsp;Zitrone&nbsp;✦&nbsp;</span>
+      <span>Pistazie&nbsp;✦&nbsp;Stracciatella&nbsp;✦&nbsp;Schokolade&nbsp;✦&nbsp;Erdbeere&nbsp;✦&nbsp;Tiramisu&nbsp;✦&nbsp;Mango&nbsp;✦&nbsp;Haselnuss&nbsp;✦&nbsp;Zitrone&nbsp;✦&nbsp;</span>
     </div>
-  </section>
+  </div>
 
-  <!-- ===================== BESTSELLER ===================== -->
-  <section class="section bestseller">
-    <div class="container">
-      <div class="section__head">
-        <h2 class="section__title">Unsere Bestseller</h2>
-        <a href="#" class="section__link">alle anzeigen →</a>
-      </div>
+  <!-- ============ BESTSELLER — HORIZONTAL SCROLL ============ -->
+  <section class="hwrap" id="bestseller">
+    <div class="hpin" id="hpin">
+      <div class="htrack" id="htrack">
 
-      <div class="carousel">
-        <button class="carousel__arrow carousel__arrow--prev" aria-label="Zurück" id="prevBtn">‹</button>
-        <div class="carousel__track" id="track">
-
-          <article class="product">
-            <div class="product__media product__media--pistazie">
-              <span class="badge badge--green">Bestseller</span>
-            </div>
-            <div class="product__body">
-              <span class="product__cat">ROSA</span>
-              <h3 class="product__name">Pistazie Premium</h3>
-              <div class="product__rating"><span class="stars">★★★★★</span><span class="product__count">(2.418)</span></div>
-              <div class="product__foot">
-                <span class="product__price">ab <strong>4,99 €</strong></span>
-                <button class="addbtn" aria-label="In den Warenkorb">🛒</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product__media product__media--schoko">
-              <span class="badge badge--red">-30% glasiert</span>
-            </div>
-            <div class="product__body">
-              <span class="product__cat">SCHOKOLADE</span>
-              <h3 class="product__name">Schokolade Pur</h3>
-              <div class="product__rating"><span class="stars">★★★★★</span><span class="product__count">(1.902)</span></div>
-              <div class="product__foot">
-                <span class="product__price">ab <strong>4,99 €</strong></span>
-                <button class="addbtn" aria-label="In den Warenkorb">🛒</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product__media product__media--erdbeere">
-              <span class="badge badge--gold">Neu</span>
-            </div>
-            <div class="product__body">
-              <span class="product__cat">FRUCHT</span>
-              <h3 class="product__name">Erdbeere</h3>
-              <div class="product__rating"><span class="stars">★★★★★</span><span class="product__count">(864)</span></div>
-              <div class="product__foot">
-                <span class="product__price">ab <strong>4,99 €</strong></span>
-                <button class="addbtn" aria-label="In den Warenkorb">🛒</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product__media product__media--haselnuss">
-              <span class="badge badge--green">Bestseller</span>
-            </div>
-            <div class="product__body">
-              <span class="product__cat">NUSS</span>
-              <h3 class="product__name">Haselnuss Krokant</h3>
-              <div class="product__rating"><span class="stars">★★★★★</span><span class="product__count">(1.557)</span></div>
-              <div class="product__foot">
-                <span class="product__price">ab <strong>4,99 €</strong></span>
-                <button class="addbtn" aria-label="In den Warenkorb">🛒</button>
-              </div>
-            </div>
-          </article>
-
-          <article class="product">
-            <div class="product__media product__media--stracciatella">
-              <span class="badge badge--gold">Beliebt</span>
-            </div>
-            <div class="product__body">
-              <span class="product__cat">KLASSIKER</span>
-              <h3 class="product__name">Stracciatella</h3>
-              <div class="product__rating"><span class="stars">★★★★★</span><span class="product__count">(945)</span></div>
-              <div class="product__foot">
-                <span class="product__price">ab <strong>4,99 €</strong></span>
-                <button class="addbtn" aria-label="In den Warenkorb">🛒</button>
-              </div>
-            </div>
-          </article>
-
+        <div class="hintro">
+          <p class="hintro__eyebrow">— Unsere Bestseller</p>
+          <h2 class="hintro__title">Sorten, die<br /><em>süchtig</em> machen.</h2>
+          <p class="hintro__hint">Scrollen, um zu entdecken →</p>
         </div>
-        <button class="carousel__arrow carousel__arrow--next" aria-label="Weiter" id="nextBtn">›</button>
-      </div>
-    </div>
-  </section>
 
-  <!-- ===================== THREE FEATURE CARDS ===================== -->
-  <section class="section feature3">
-    <div class="container feature3__grid">
-
-      <div class="fcard fcard--month">
-        <span class="fcard__tag">Eis des Monats</span>
-        <h3 class="fcard__title">Pistazie Deluxe</h3>
-        <p class="fcard__sub">Nur für kurze Zeit!</p>
-        <a href="#" class="btn btn--green">Jetzt probieren</a>
-      </div>
-
-      <div class="fcard fcard--club">
-        <div class="club__head">
-          <div>
-            <span class="fcard__tag fcard__tag--dark">Club Gino</span>
-            <h3 class="fcard__title fcard__title--dark">Exklusive Vorteile für Mitglieder</h3>
+        <article class="hcard" data-tilt>
+          <div class="hcard__media" style="--img:url('assets/scoop-pistazie.svg')"><span class="hcard__num">01</span></div>
+          <div class="hcard__body">
+            <h3>Pistazie Premium</h3>
+            <p class="hcard__meta">★ 4.9 · 2.418 Bewertungen</p>
+            <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
+              <button class="hcard__add" data-add data-hover>+</button></div>
           </div>
-          <div class="club__card">GINO<br><small>CLUB</small></div>
+        </article>
+
+        <article class="hcard" data-tilt>
+          <div class="hcard__media" style="--img:url('assets/scoop-schoko.svg')"><span class="hcard__num">02</span></div>
+          <div class="hcard__body">
+            <h3>Schokolade Pur</h3>
+            <p class="hcard__meta">★ 4.9 · 1.982 Bewertungen</p>
+            <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
+              <button class="hcard__add" data-add data-hover>+</button></div>
+          </div>
+        </article>
+
+        <article class="hcard" data-tilt>
+          <div class="hcard__media" style="--img:url('assets/scoop-erdbeere.svg')"><span class="hcard__num">03</span></div>
+          <div class="hcard__body">
+            <h3>Erdbeere</h3>
+            <p class="hcard__meta">★ 4.8 · 864 Bewertungen</p>
+            <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
+              <button class="hcard__add" data-add data-hover>+</button></div>
+          </div>
+        </article>
+
+        <article class="hcard" data-tilt>
+          <div class="hcard__media" style="--img:url('assets/scoop-haselnuss.svg')"><span class="hcard__num">04</span></div>
+          <div class="hcard__body">
+            <h3>Haselnuss Krokant</h3>
+            <p class="hcard__meta">★ 4.9 · 1.557 Bewertungen</p>
+            <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
+              <button class="hcard__add" data-add data-hover>+</button></div>
+          </div>
+        </article>
+
+        <article class="hcard" data-tilt>
+          <div class="hcard__media" style="--img:url('assets/scoop-stracciatella.svg')"><span class="hcard__num">05</span></div>
+          <div class="hcard__body">
+            <h3>Stracciatella</h3>
+            <p class="hcard__meta">★ 4.8 · 945 Bewertungen</p>
+            <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
+              <button class="hcard__add" data-add data-hover>+</button></div>
+          </div>
+        </article>
+
+        <div class="hend">
+          <a href="eis-sorten.html" class="btn-big btn-big--ghost" data-magnetic>
+            <span>Alle 500+ Sorten</span><span class="btn-big__circle">→</span>
+          </a>
         </div>
-        <ul class="club__list">
-          <li>10% Rabatt auf alle Bestellungen</li>
-          <li>Exklusive Sorten &amp; Aktionen</li>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ STATS ============ -->
+  <section class="stats">
+    <div class="stats__grid">
+      <div class="stat"><span class="stat__num" data-count="500" data-suffix="+">0</span><span class="stat__label">Eissorten</span></div>
+      <div class="stat"><span class="stat__num" data-count="25000" data-suffix="+">0</span><span class="stat__label">Glückliche Kunden</span></div>
+      <div class="stat"><span class="stat__num" data-count="4.9" data-decimals="1">0</span><span class="stat__label">⌀ Bewertung</span></div>
+      <div class="stat"><span class="stat__num" data-count="1969" data-plain>0</span><span class="stat__label">Gegründet in Italien</span></div>
+    </div>
+  </section>
+
+  <!-- ============ STORY / PARALLAX ============ -->
+  <section class="story" id="story">
+    <div class="story__media-wrap">
+      <div class="story__media" id="storyMedia"></div>
+    </div>
+    <div class="story__content">
+      <p class="story__eyebrow reveal-line"><span>— Unsere Wurzeln</span></p>
+      <h2 class="story__title">
+        <span class="reveal-word">Drei</span>
+        <span class="reveal-word">Generationen.</span><br/>
+        <span class="reveal-word">Ein</span>
+        <span class="reveal-word"><em>Rezept</em>.</span>
+      </h2>
+      <p class="story__text reveal-fade">1969 öffnete Nonno Gino seine erste Gelateria an der ligurischen Küste.
+        Heute machen wir sein Gelato genauso wie damals — beste Zutaten, langsam gerührt,
+        ohne Kompromisse. Nur die Lieferung ist neu: tiefkühlfrisch bis an deine Tür.</p>
+      <a href="#" class="btn-line reveal-fade" data-hover>Unsere Geschichte lesen</a>
+    </div>
+  </section>
+
+  <!-- ============ BENTO GRID ============ -->
+  <section class="bento" id="club">
+    <h2 class="bento__heading"><span class="reveal-word">Mehr</span> <span class="reveal-word">als</span> <span class="reveal-word"><em>Eis</em>.</span></h2>
+    <div class="bento__grid">
+      <article class="bcard bcard--tall" data-tilt>
+        <span class="bcard__tag">Club Gino</span>
+        <h3>Exklusive Vorteile für Mitglieder</h3>
+        <ul>
+          <li>10% Rabatt auf alles</li>
+          <li>Exklusive Sorten &amp; Drops</li>
           <li>Geburtstagsüberraschung</li>
-          <li>Monatliche Specials</li>
         </ul>
-        <a href="#" class="btn btn--dark">Mehr erfahren</a>
-      </div>
-
-      <div class="fcard fcard--live">
-        <span class="fcard__tag fcard__tag--dark">Live Käufe</span>
-        <h3 class="fcard__title fcard__title--dark fcard__title--sm">In den letzten Minuten</h3>
-        <ul class="live__list">
-          <li><span class="live__avatar">🧑</span><div><strong>Pistazie Premium</strong><small>vor 2 Minuten</small></div></li>
-          <li><span class="live__avatar">👩</span><div><strong>Schokolade Pur</strong><small>vor 4 Minuten</small></div></li>
-          <li><span class="live__avatar">🧔</span><div><strong>Erdbeere</strong><small>vor 5 Minuten</small></div></li>
-        </ul>
-        <p class="live__foot">+25.000 zufriedene Kunden</p>
-      </div>
-
+        <a href="#" class="bcard__link" data-hover>Mitglied werden →</a>
+        <div class="bcard__glow"></div>
+      </article>
+      <article class="bcard bcard--green" data-tilt>
+        <span class="bcard__tag">Eis des Monats</span>
+        <h3>Pistazie Deluxe</h3>
+        <p>Doppelt geröstete Bronte-Pistazien. Nur im Juni.</p>
+        <a href="eis-sorten.html" class="bcard__link" data-hover>Probieren →</a>
+        <div class="bcard__glow"></div>
+      </article>
+      <article class="bcard" data-tilt>
+        <span class="bcard__tag">Live</span>
+        <h3><span class="livepulse"></span>Gerade bestellt</h3>
+        <p id="liveTicker">Pistazie Premium — vor 2 Min.</p>
+        <div class="bcard__glow"></div>
+      </article>
+      <article class="bcard bcard--wide" data-tilt>
+        <span class="bcard__tag">KI Eisberater</span>
+        <h3>Welches Eis passt heute zu dir?</h3>
+        <p>Beantworte 3 Fragen — unser Berater findet deine Sorte.</p>
+        <a href="#" class="bcard__link" data-hover>Berater starten →</a>
+        <div class="bcard__glow"></div>
+      </article>
     </div>
   </section>
 
-  <!-- ===================== ITALIAN TRADITION ===================== -->
-  <section class="tradition">
-    <div class="container tradition__grid">
-      <div class="tradition__media" role="img" aria-label="Italienische Küste"></div>
-      <div class="tradition__content">
-        <span class="eyebrow">— Unsere Wurzeln</span>
-        <h2 class="tradition__title">Italienische<br />Eistradition<br />seit 1969</h2>
-        <p class="tradition__text">Aus traditioneller italienischer Handwerkskunst und besten Zutaten erhältst unser ursprüngliches Familienrezept. Natürlich, authentisch und mit viel Liebe gemacht.</p>
-        <a href="#" class="btn btn--dark">Mehr über uns</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ===================== TRUST BAR ===================== -->
-  <section class="trust">
-    <div class="container trust__inner">
-      <div class="trust__item"><span class="trust__icon">🚚</span><div><strong>Kostenloser Versand</strong><small>ab 49€ Bestellwert</small></div></div>
-      <div class="trust__item"><span class="trust__icon">⚡</span><div><strong>Schnelle Lieferung</strong><small>mit Express-Versand</small></div></div>
-      <div class="trust__item"><span class="trust__icon">❄️</span><div><strong>Tiefkühlfrisch</strong><small>in nachhaltiger Verpackung</small></div></div>
-      <div class="trust__item"><span class="trust__icon">🔒</span><div><strong>Sichere Zahlung</strong><small>SSL verschlüsselt</small></div></div>
-      <div class="trust__item"><span class="trust__icon">⭐</span><div><strong>Kundenbewertung</strong><small>4,9/5 Sterne</small></div></div>
-    </div>
-  </section>
-
-  <!-- ===================== RECIPES & COMMUNITY ===================== -->
-  <section class="section reccom">
-    <div class="container reccom__grid">
-
-      <div class="reccard reccard--recipes">
-        <div class="reccard__media reccard__media--recipes"></div>
-        <div class="reccard__body">
-          <span class="eyebrow">Rezeptwelt</span>
-          <h3 class="reccard__title">Kreative Ideen mit Gino Gelati</h3>
-          <p>Entdecke leckere Rezepte für eine besondere Momente.</p>
-          <a href="#" class="btn btn--outline-gold">Rezepte entdecken</a>
-        </div>
-      </div>
-
-      <div class="reccard reccard--community">
-        <div class="reccard__body">
-          <span class="eyebrow">Community</span>
-          <h3 class="reccard__title">Teile deine Eismomente</h3>
-          <p>Werde Teil unserer Community und zeige deine Kreationen.</p>
-          <a href="#" class="btn btn--outline-gold">Jetzt teilen</a>
-        </div>
-        <div class="reccard__gallery">
-          <span>🍨</span><span>🍦</span><span>🍧</span>
-          <span>🥄</span><span>😋</span><span>🍓</span>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ===================== NEWSLETTER ===================== -->
-  <section class="newsletter">
-    <div class="container newsletter__inner">
-      <h2 class="newsletter__title">Bleib immer auf dem Laufenden</h2>
-      <p class="newsletter__text">Erhalte exklusive Angebote, neue Sorten und leckere Rezepte direkt in dein Postfach.</p>
-      <form class="newsletter__form" onsubmit="return false;">
-        <input type="email" placeholder="Deine E-Mail-Adresse" aria-label="E-Mail-Adresse" />
-        <button type="submit" class="btn btn--red">Anmelden</button>
+  <!-- ============ NEWSLETTER ============ -->
+  <section class="cta">
+    <div class="cta__card" data-tilt>
+      <h2 class="cta__title">Bleib auf dem <em>Laufenden</em>.</h2>
+      <p>Neue Sorten, exklusive Drops und Rezepte — direkt in dein Postfach.</p>
+      <form class="cta__form" id="nlForm">
+        <input type="email" placeholder="deine@email.de" aria-label="E-Mail" required />
+        <button type="submit" class="btn-pill" data-magnetic>Anmelden</button>
       </form>
-      <ul class="newsletter__tags">
-        <li>✓ Exklusive Angebote</li>
-        <li>✓ Neue Sorten</li>
-        <li>✓ Leckere Rezepte</li>
-        <li>✓ Aktionen &amp; Rabatte</li>
-      </ul>
     </div>
   </section>
 
-  <!-- ===================== FOOTER ===================== -->
+  <!-- ============ FOOTER ============ -->
   <footer class="footer">
-    <div class="container footer__top">
-      <div class="footer__brand">
-        <span class="logo__name logo__name--light">Gino Gelati</span>
-        <span class="logo__sub logo__sub--light">— DAL 1969 —</span>
-        <p class="footer__desc">Italienische Eistradition und Leidenschaft seit 1969. Aus Liebe zum echten italienischen Eisgenuss direkt zu dir nach Hause.</p>
-        <div class="footer__social">
-          <a href="#" aria-label="Instagram">📷</a>
-          <a href="#" aria-label="Facebook">📘</a>
-          <a href="#" aria-label="TikTok">🎵</a>
-          <a href="#" aria-label="YouTube">▶️</a>
-        </div>
-      </div>
-
-      <div class="footer__col">
+    <div class="footer__big" aria-hidden="true">Gino Gelati</div>
+    <div class="footer__grid">
+      <div>
         <h4>Shop</h4>
-        <ul>
-          <li><a href="#">Eis Sorten</a></li>
-          <li><a href="#">Aktionen</a></li>
-          <li><a href="#">Neuheiten</a></li>
-          <li><a href="#">Geschenkideen</a></li>
-          <li><a href="#">Gutscheine</a></li>
-        </ul>
+        <a href="eis-sorten.html" data-hover>Eis Sorten</a><a href="#" data-hover>Aktionen</a><a href="#" data-hover>Gutscheine</a>
       </div>
-
-      <div class="footer__col">
+      <div>
         <h4>Service</h4>
-        <ul>
-          <li><a href="#">Kundenservice</a></li>
-          <li><a href="#">Versand &amp; Lieferung</a></li>
-          <li><a href="#">Zahlung &amp; Sicherheit</a></li>
-          <li><a href="#">Häufige Fragen</a></li>
-          <li><a href="#">Kontakt</a></li>
-        </ul>
+        <a href="#" data-hover>Kundenservice</a><a href="#" data-hover>Versand</a><a href="#" data-hover>FAQ</a>
       </div>
-
-      <div class="footer__col">
+      <div>
         <h4>Über uns</h4>
-        <ul>
-          <li><a href="#">Unsere Geschichte</a></li>
-          <li><a href="#">Qualität &amp; Zutaten</a></li>
-          <li><a href="#">Nachhaltigkeit</a></li>
-          <li><a href="#">Karriere</a></li>
-          <li><a href="#">Presse</a></li>
-        </ul>
+        <a href="#story" data-hover>Geschichte</a><a href="#" data-hover>Nachhaltigkeit</a><a href="#" data-hover>Karriere</a>
       </div>
-
-      <div class="footer__col">
-        <h4>Informationen</h4>
-        <ul>
-          <li><a href="#">AGB</a></li>
-          <li><a href="#">Datenschutz</a></li>
-          <li><a href="#">Impressum</a></li>
-          <li><a href="#">Widerrufsrecht</a></li>
-          <li><a href="#">Cookie-Einstellungen</a></li>
-        </ul>
+      <div>
+        <h4>Rechtliches</h4>
+        <a href="#" data-hover>AGB</a><a href="#" data-hover>Datenschutz</a><a href="#" data-hover>Impressum</a>
       </div>
     </div>
-
-    <div class="footer__bottom">
-      <div class="container footer__bottom-inner">
-        <p>© 2024 Gino Gelati. Alle Rechte vorbehalten.</p>
-        <div class="footer__pay">
-          <span>PayPal</span><span>Klarna</span><span>VISA</span><span>Mastercard</span><span>Amex</span>
-        </div>
-      </div>
+    <div class="footer__base">
+      <span>© 2026 Gino Gelati. Alle Rechte vorbehalten.</span>
+      <span>PayPal · Klarna · VISA · Mastercard</span>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="assets/vendor/gsap.min.js"></script>
+  <script src="assets/vendor/ScrollTrigger.min.js"></script>
+  <script src="assets/vendor/lenis.min.js"></script>
+  <script src="assets/vendor/three.min.js"></script>
+  <script src="main.js"></script>
 </body>
 </html>
