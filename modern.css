@@ -14,9 +14,34 @@
   --line: rgba(244, 237, 223, .12);
   --font-display: 'Playfair Display', serif;
   --font-body: 'Poppins', system-ui, sans-serif;
+
+  /* Eigene Easing-Kurven (CSS-Defaults sind zu schwach) – Emil Kowalski */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 140ms;
+
+  /* getönte Schatten statt generischem Grau */
+  --shadow-pistachio: 0 18px 50px rgba(169, 194, 94, .14);
+  --shadow-berry: 0 18px 50px rgba(232, 136, 154, .14);
+  --shadow-ink: 0 24px 60px rgba(0, 0, 0, .35);
+
+  /* z-index-Skala (Disziplin: nie über 50) */
+  --z-nav: 20;
+  --z-progress: 30;
+  --z-grain: 35;
+  --z-preloader: 45;
+  --z-cursor: 50; /* Ausnahme dokumentiert: Custom-Cursor muss über allem liegen */
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* Lucide-Stil Icons – ersetzen Emojis im gesamten UI */
+.icon {
+  width: 1.25em; height: 1.25em; display: inline-block; vertical-align: middle;
+  fill: none; stroke: currentColor; stroke-width: 1.75;
+  stroke-linecap: round; stroke-linejoin: round; flex: none;
+}
 html { scroll-behavior: auto; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
@@ -36,7 +61,7 @@ em { font-style: italic; }
 
 /* ============ PRELOADER ============ */
 .preloader {
-  position: fixed; inset: 0; z-index: 1000; background: var(--bg);
+  position: fixed; inset: 0; z-index: var(--z-preloader); background: var(--bg);
   display: grid; place-items: center;
   transition: transform .9s cubic-bezier(.76, 0, .24, 1);
 }
@@ -48,7 +73,7 @@ em { font-style: italic; }
 .preloader__bar span { display: block; height: 100%; width: 0%; background: var(--pistachio); transition: width .2s ease; }
 
 /* ============ CURSOR ============ */
-.cursor, .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; z-index: 999; border-radius: 50%; }
+.cursor, .cursor-dot { position: fixed; top: 0; left: 0; pointer-events: none; z-index: var(--z-cursor); border-radius: 50%; }
 .cursor {
   width: 36px; height: 36px; border: 1.5px solid rgba(244,237,223,.5);
   transform: translate(-50%, -50%);
@@ -60,12 +85,12 @@ em { font-style: italic; }
 
 /* ============ PROGRESS / GRAIN ============ */
 .progress {
-  position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 998;
+  position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: var(--z-progress);
   background: linear-gradient(90deg, var(--pistachio), var(--gold), var(--red));
   transform-origin: 0 50%; transform: scaleX(0);
 }
 .grain {
-  position: fixed; inset: -50%; z-index: 997; pointer-events: none; opacity: .05;
+  position: fixed; inset: -50%; z-index: var(--z-grain); pointer-events: none; opacity: .05;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain 8s steps(10) infinite;
 }
@@ -75,7 +100,7 @@ em { font-style: italic; }
 }
 
 /* ============ NAV ============ */
-.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; transition: background .4s ease, backdrop-filter .4s ease, border-color .4s ease; border-bottom: 1px solid transparent; }
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: var(--z-nav); transition: background .4s ease, backdrop-filter .4s ease, border-color .4s ease; border-bottom: 1px solid transparent; }
 .nav.is-scrolled { background: rgba(14,20,16,.7); backdrop-filter: blur(16px); border-color: var(--line); }
 .nav__inner { display: flex; align-items: center; justify-content: space-between; padding: 1rem 4vw; }
 .nav__logo { display: inline-flex; flex-direction: column; line-height: 1; }
@@ -278,7 +303,62 @@ em { font-style: italic; }
 .footer__grid h4 { font-size: .72rem; letter-spacing: .25em; text-transform: uppercase; color: var(--pistachio); margin-bottom: 1rem; font-family: var(--font-body); }
 .footer__grid a { display: block; color: var(--cream-dim); font-size: .88rem; padding-block: .25rem; transition: color .2s ease, transform .2s ease; }
 .footer__grid a:hover { color: var(--cream); transform: translateX(4px); }
-.footer__base { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--cream-dim); font-size: .75rem; }
+.footer__base { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-top: 3.5rem; padding-top: 1.4rem; border-top: 1px solid var(--line); color: var(--cream-dim); font-size: .75rem; }
+.footer__social { display: flex; gap: .4rem; }
+.footer__social a {
+  width: 40px; height: 40px; border-radius: 50%; display: grid; place-items: center;
+  border: 1px solid var(--line); color: var(--cream-dim);
+  transition: color var(--dur-press) var(--ease-out), border-color var(--dur-press) var(--ease-out), transform var(--dur-press) var(--ease-out);
+}
+.footer__social .icon { width: 18px; height: 18px; }
+
+/* ============================================================
+   CRAFT-LAYER — Emil Kowalski + Taste
+   Press-Feedback, getönte Schatten, Icon-Feinheiten, Touch-Schutz
+   ============================================================ */
+
+/* Icon-Größen je Kontext */
+.nav__cart .icon { width: 20px; height: 20px; }
+.btn-pill__arrow { width: 16px; height: 16px; }
+.btn-big__circle .icon { width: 22px; height: 22px; }
+.hero__badge-center .icon { width: 26px; height: 26px; color: var(--cream); }
+.hcard__add .icon { width: 20px; height: 20px; }
+.icon--star { width: 15px; height: 15px; fill: var(--gold); stroke: none; }
+.hcard__meta { display: inline-flex; align-items: center; gap: .35rem; }
+
+/* Checkliste mit echten Check-Icons statt ✓-Zeichen */
+.checklist { list-style: none; display: grid; gap: .5rem; margin-top: .4rem; }
+.checklist li { display: flex; align-items: center; gap: .55rem; color: var(--cream-dim); font-size: .88rem; font-weight: 300; }
+.checklist .icon { width: 16px; height: 16px; color: var(--pistachio); stroke-width: 2.25; }
+.checklist li::before { content: none; } /* altes ✓-Zeichen entfernen */
+
+/* Press-Feedback: scale(0.97) – nur Maus/Touch, GPU-only.
+   ease-out, ~140ms; Buttons müssen sich angefasst anfühlen. */
+.btn-pill, .nav__cart, .hcard__add, .footer__social a,
+.cta__form button, .btn-big__circle, .wish, .bcard__link {
+  transition-property: transform, background, color, border-color, box-shadow;
+  transition-duration: var(--dur-press);
+  transition-timing-function: var(--ease-out);
+}
+.btn-pill:active, .nav__cart:active, .hcard__add:active,
+.footer__social a:active, .cta__form button:active { transform: scale(.96); }
+.btn-big:active .btn-big__circle { transform: scale(.94); }
+.btn-line:active { transform: scale(.98); }
+
+/* Hover-Veredelung: getönte Schatten + sanftes Anheben (GPU-only) */
+.hcard, .bcard { transition: transform .25s var(--ease-out), box-shadow .25s var(--ease-out); }
+
+/* Hover-Effekte nur auf echten Zeigegeräten – verhindert Sticky-Hover auf Touch */
+@media (hover: hover) and (pointer: fine) {
+  .hcard:hover { box-shadow: var(--shadow-ink); }
+  .bcard:hover { box-shadow: var(--shadow-pistachio); }
+  .hcard__add:hover { background: var(--pistachio); color: #11180d; }
+  .footer__social a:hover { color: var(--cream); border-color: var(--pistachio); transform: translateY(-2px); }
+}
+@media (hover: none) {
+  /* Touch: keine hängenbleibenden Transform-Hover */
+  .footer__grid a:hover, .hcard:hover, .bcard:hover { transform: none; }
+}
 
 /* ============ RESPONSIVE ============ */
 @media (max-width: 980px) {

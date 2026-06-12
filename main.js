@@ -39,7 +39,7 @@
       .from('.hero__eyebrow span', { yPercent: 130, duration: 0.8 }, 0.15)
       .from('.hero__sub', { y: 30, autoAlpha: 0, duration: 0.9 }, 0.55)
       .from('.hero__cta', { y: 30, autoAlpha: 0, duration: 0.9 }, 0.7)
-      .from('.hero__badge', { scale: 0, rotate: -90, duration: 1, ease: 'back.out(1.6)' }, 0.8)
+      .from('.hero__badge', { scale: 0.85, autoAlpha: 0, rotate: -90, duration: 1, ease: 'back.out(1.6)' }, 0.8)
       .from('.hero__scrollhint', { autoAlpha: 0, duration: 0.8 }, 1);
   }
 
@@ -191,15 +191,19 @@
     }
 
     var t0 = performance.now();
+    var sm = { x: 0, y: 0 }; // gefederte Maus – fühlt sich natürlicher an als direkte Zuordnung
     function loop(now) {
       requestAnimationFrame(loop);
       if (!heroVisible) return;
       var t = (now - t0) / 1000;
+      // sanfte Annäherung (Federung) statt mechanischer 1:1-Kopplung
+      sm.x += (mouse.x - sm.x) * 0.06;
+      sm.y += (mouse.y - sm.y) * 0.06;
       gelato.rotation.y = t * 0.25 + scrollState.rot;
       gelato.position.y = -0.4 + Math.sin(t * 0.8) * 0.18 + scrollState.y;
-      gelato.rotation.x = mouse.y * 0.12;
-      gelato.rotation.z = -0.12 + mouse.x * 0.08;
-      camera.position.x = mouse.x * 0.4; camera.position.y = -mouse.y * 0.3;
+      gelato.rotation.x = sm.y * 0.12;
+      gelato.rotation.z = -0.12 + sm.x * 0.08;
+      camera.position.x = sm.x * 0.4; camera.position.y = -sm.y * 0.3;
       camera.lookAt(1.6, 0, 0);
       for (var j = 0; j < sprinkles.children.length; j++) {
         var s = sprinkles.children[j];
@@ -293,7 +297,7 @@
     });
   }
 
-  /* ---------- Magnetic Buttons ---------- */
+  /* ---------- Magnetic Buttons + Press-Feedback ---------- */
   if (finePtr && animate) {
     document.querySelectorAll('[data-magnetic]').forEach(function (el) {
       el.addEventListener('mousemove', function (e) {
@@ -301,7 +305,15 @@
         gsap.to(el, { x: (e.clientX - b.left - b.width / 2) * 0.3, y: (e.clientY - b.top - b.height / 2) * 0.3, duration: 0.4, ease: 'power2.out' });
       });
       el.addEventListener('mouseleave', function () {
-        gsap.to(el, { x: 0, y: 0, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+        gsap.to(el, { x: 0, y: 0, scale: 1, duration: 0.7, ease: 'elastic.out(1, 0.4)' });
+      });
+      // Press-Feedback: scale(0.97) – Magnetic-Buttons setzen transform via gsap,
+      // daher hier statt per CSS :active
+      el.addEventListener('pointerdown', function () {
+        gsap.to(el, { scale: 0.96, duration: 0.14, ease: 'power2.out' });
+      });
+      el.addEventListener('pointerup', function () {
+        gsap.to(el, { scale: 1, duration: 0.3, ease: 'back.out(2)' });
       });
     });
   }

@@ -12,6 +12,26 @@
 </head>
 <body>
 
+  <!-- ============ ICON SPRITE (Lucide-Stil, strokeWidth 1.75) ============ -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-bag" viewBox="0 0 24 24">
+        <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/>
+      </symbol>
+      <symbol id="i-cone" viewBox="0 0 24 24">
+        <path d="m7 11 4.08 10.35a1 1 0 0 0 1.84 0L17 11"/><path d="M17 7A5 5 0 0 0 7 7"/><path d="M17 7a2 2 0 0 1 0 4H7a2 2 0 0 1 0-4"/>
+      </symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 2.5l2.9 5.88 6.49.94-4.7 4.58 1.11 6.46L12 17.8l-5.8 3.05 1.1-6.46L2.6 9.82l6.5-.94z"/></symbol>
+      <symbol id="i-instagram" viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></symbol>
+      <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></symbol>
+      <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"/><path d="m10 15 5-3-5-3z"/></symbol>
+      <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+    </defs>
+  </svg>
+
   <!-- ============ PRELOADER ============ -->
   <div class="preloader" id="preloader">
     <div class="preloader__inner">
@@ -55,9 +75,11 @@
       </nav>
       <div class="nav__actions">
         <a href="eis-sorten.html" class="btn-pill" data-magnetic>Jetzt bestellen
-          <span class="btn-pill__arrow">→</span>
+          <svg class="icon btn-pill__arrow"><use href="#i-arrow"/></svg>
         </a>
-        <button class="nav__cart" aria-label="Warenkorb" data-hover>🛒<em id="cartBadge">0</em></button>
+        <button class="nav__cart" aria-label="Warenkorb" data-hover>
+          <svg class="icon"><use href="#i-bag"/></svg><em id="cartBadge">0</em>
+        </button>
       </div>
     </div>
   </header>
@@ -79,7 +101,7 @@
         Handwerkskunst — tiefkühlfrisch zu dir nach Hause.</p>
       <div class="hero__cta reveal-fade">
         <a href="eis-sorten.html" class="btn-big" data-magnetic>
-          <span>Sorten entdecken</span><span class="btn-big__circle">→</span>
+          <span>Sorten entdecken</span><span class="btn-big__circle"><svg class="icon"><use href="#i-arrow"/></svg></span>
         </a>
         <a href="#bestseller" class="btn-line" data-hover>Bestseller ansehen</a>
       </div>
@@ -91,7 +113,7 @@
         <defs><path id="circ" d="M60,60 m -44,0 a44,44 0 1,1 88,0 a44,44 0 1,1 -88,0"/></defs>
         <text><textPath href="#circ">GELATO ARTIGIANALE · DAL 1969 · GINO GELATI ·</textPath></text>
       </svg>
-      <span class="hero__badge-center">🍦</span>
+      <span class="hero__badge-center"><svg class="icon"><use href="#i-cone"/></svg></span>
     </div>
 
     <div class="hero__scrollhint" aria-hidden="true">
@@ -123,9 +145,9 @@
           <div class="hcard__media" style="--img:url('assets/scoop-pistazie.svg')"><span class="hcard__num">01</span></div>
           <div class="hcard__body">
             <h3>Pistazie Premium</h3>
-            <p class="hcard__meta">★ 4.9 · 2.418 Bewertungen</p>
+            <p class="hcard__meta"><svg class="icon icon--star"><use href="#i-star"/></svg> 4.9 · 2.418 Bewertungen</p>
             <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
-              <button class="hcard__add" data-add data-hover>+</button></div>
+              <button class="hcard__add" data-add data-hover aria-label="In den Warenkorb"><svg class="icon"><use href="#i-plus"/></svg></button></div>
           </div>
         </article>
 
@@ -133,9 +155,9 @@
           <div class="hcard__media" style="--img:url('assets/scoop-schoko.svg')"><span class="hcard__num">02</span></div>
           <div class="hcard__body">
             <h3>Schokolade Pur</h3>
-            <p class="hcard__meta">★ 4.9 · 1.982 Bewertungen</p>
+            <p class="hcard__meta"><svg class="icon icon--star"><use href="#i-star"/></svg> 4.9 · 1.982 Bewertungen</p>
             <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
-              <button class="hcard__add" data-add data-hover>+</button></div>
+              <button class="hcard__add" data-add data-hover aria-label="In den Warenkorb"><svg class="icon"><use href="#i-plus"/></svg></button></div>
           </div>
         </article>
 
@@ -143,9 +165,9 @@
           <div class="hcard__media" style="--img:url('assets/scoop-erdbeere.svg')"><span class="hcard__num">03</span></div>
           <div class="hcard__body">
             <h3>Erdbeere</h3>
-            <p class="hcard__meta">★ 4.8 · 864 Bewertungen</p>
+            <p class="hcard__meta"><svg class="icon icon--star"><use href="#i-star"/></svg> 4.8 · 864 Bewertungen</p>
             <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
-              <button class="hcard__add" data-add data-hover>+</button></div>
+              <button class="hcard__add" data-add data-hover aria-label="In den Warenkorb"><svg class="icon"><use href="#i-plus"/></svg></button></div>
           </div>
         </article>
 
@@ -153,9 +175,9 @@
           <div class="hcard__media" style="--img:url('assets/scoop-haselnuss.svg')"><span class="hcard__num">04</span></div>
           <div class="hcard__body">
             <h3>Haselnuss Krokant</h3>
-            <p class="hcard__meta">★ 4.9 · 1.557 Bewertungen</p>
+            <p class="hcard__meta"><svg class="icon icon--star"><use href="#i-star"/></svg> 4.9 · 1.557 Bewertungen</p>
             <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
-              <button class="hcard__add" data-add data-hover>+</button></div>
+              <button class="hcard__add" data-add data-hover aria-label="In den Warenkorb"><svg class="icon"><use href="#i-plus"/></svg></button></div>
           </div>
         </article>
 
@@ -163,15 +185,15 @@
           <div class="hcard__media" style="--img:url('assets/scoop-stracciatella.svg')"><span class="hcard__num">05</span></div>
           <div class="hcard__body">
             <h3>Stracciatella</h3>
-            <p class="hcard__meta">★ 4.8 · 945 Bewertungen</p>
+            <p class="hcard__meta"><svg class="icon icon--star"><use href="#i-star"/></svg> 4.8 · 945 Bewertungen</p>
             <div class="hcard__row"><span class="hcard__price">ab 4,99 €</span>
-              <button class="hcard__add" data-add data-hover>+</button></div>
+              <button class="hcard__add" data-add data-hover aria-label="In den Warenkorb"><svg class="icon"><use href="#i-plus"/></svg></button></div>
           </div>
         </article>
 
         <div class="hend">
           <a href="eis-sorten.html" class="btn-big btn-big--ghost" data-magnetic>
-            <span>Alle 500+ Sorten</span><span class="btn-big__circle">→</span>
+            <span>Alle 500+ Sorten</span><span class="btn-big__circle"><svg class="icon"><use href="#i-arrow"/></svg></span>
           </a>
         </div>
 
@@ -216,10 +238,10 @@
       <article class="bcard bcard--tall" data-tilt>
         <span class="bcard__tag">Club Gino</span>
         <h3>Exklusive Vorteile für Mitglieder</h3>
-        <ul>
-          <li>10% Rabatt auf alles</li>
-          <li>Exklusive Sorten &amp; Drops</li>
-          <li>Geburtstagsüberraschung</li>
+        <ul class="checklist">
+          <li><svg class="icon"><use href="#i-check"/></svg>10% Rabatt auf alles</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>Exklusive Sorten &amp; Drops</li>
+          <li><svg class="icon"><use href="#i-check"/></svg>Geburtstagsüberraschung</li>
         </ul>
         <a href="#" class="bcard__link" data-hover>Mitglied werden →</a>
         <div class="bcard__glow"></div>
@@ -282,6 +304,12 @@
     </div>
     <div class="footer__base">
       <span>© 2026 Gino Gelati. Alle Rechte vorbehalten.</span>
+      <div class="footer__social">
+        <a href="#" aria-label="Instagram" data-hover><svg class="icon"><use href="#i-instagram"/></svg></a>
+        <a href="#" aria-label="Facebook" data-hover><svg class="icon"><use href="#i-facebook"/></svg></a>
+        <a href="#" aria-label="YouTube" data-hover><svg class="icon"><use href="#i-youtube"/></svg></a>
+        <a href="#" aria-label="TikTok" data-hover><svg class="icon"><use href="#i-music"/></svg></a>
+      </div>
       <span>PayPal · Klarna · VISA · Mastercard</span>
     </div>
   </footer>
